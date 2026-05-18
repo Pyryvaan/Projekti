@@ -109,10 +109,17 @@ section.active {
   text-align: center;
 }
 
-/* ⭐ ARVOSANAT */
+/* ⭐ RATING */
 .rating {
   color: gold;
   font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.rating.big {
+  transform: scale(1.4);
+  color: orange;
 }
 
 /* LIGHTBOX */
@@ -158,12 +165,12 @@ section.active {
   <div class="grid">
 
     <div class="card">
-      <img src="./pirates.jpg" alt="Pirates of the Caribbean" onclick="openLightbox(this.src)">
+      <img src="./pirates.jpg" alt="Pirates" onclick="openLightbox(this.src)">
       <div class="card-content">Pirates of the Caribbean</div>
     </div>
 
     <div class="card">
-      <img src="./lotr.jpg" alt="Lord of the Rings" onclick="openLightbox(this.src)">
+      <img src="./lotr.jpg" alt="LOTR" onclick="openLightbox(this.src)">
       <div class="card-content">Lord of the Rings</div>
     </div>
 
@@ -173,14 +180,14 @@ section.active {
     </div>
 
     <div class="card">
-      <img src="./dark.jpg" alt="The Dark Knight" onclick="openLightbox(this.src)">
+      <img src="./dark.jpg" alt="Dark Knight" onclick="openLightbox(this.src)">
       <div class="card-content">The Dark Knight</div>
     </div>
 
-<div class="card">
-  <img src="./park.jpg" alt="Jurassic Park" onclick="openLightbox(this.src)">
-  <div class="card-content">Jurassic Park</div>
-</div>
+    <div class="card">
+      <img src="./park.jpg" alt="Jurassic Park" onclick="openLightbox(this.src)">
+      <div class="card-content">Jurassic Park</div>
+    </div>
 
   </div>
 </section>
@@ -190,28 +197,26 @@ section.active {
   <h1 style="text-align:center;color:red;">Reviews</h1>
 
   <div class="card">
-    <div class="card-content">Pirates — <span class="rating">10/10</span></div>
+    <div class="card-content">Pirates — <span class="rating" onclick="toggleSize(this)">10/10</span></div>
   </div>
 
   <div class="card">
-    <div class="card-content">LOTR — <span class="rating">9.9/10</span></div>
+    <div class="card-content">LOTR — <span class="rating" onclick="toggleSize(this)">9.9/10</span></div>
   </div>
 
   <div class="card">
-    <div class="card-content">Star Wars — <span class="rating">9.8/10</span></div>
+    <div class="card-content">Star Wars — <span class="rating" onclick="toggleSize(this)">9.8/10</span></div>
   </div>
 
   <div class="card">
-    <div class="card-content">The Dark Knight — <span class="rating">9.5/10</span></div>
+    <div class="card-content">Dark Knight — <span class="rating" onclick="toggleSize(this)">9.5/10</span></div>
   </div>
 </section>
 
 <!-- CONTACT -->
 <section id="contact">
   <h1 style="text-align:center;color:red;">Contact</h1>
-
   <div style="text-align:center;">
-    <p>Feedback?</p>
     <p>Email: cinema@example.com</p>
   </div>
 </section>
@@ -220,7 +225,7 @@ section.active {
 <div class="lightbox" id="lightbox" onclick="closeLightbox()">
   <img id="lightbox-img"
        src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
-       alt="Expanded movie image">
+       alt="Expanded movie">
 </div>
 
 <script>
@@ -236,6 +241,11 @@ function openLightbox(src) {
 
 function closeLightbox() {
   document.getElementById("lightbox").style.display = "none";
+}
+
+/* ⭐ rating size toggle */
+function toggleSize(el) {
+  el.classList.toggle("big");
 }
 </script>
 
