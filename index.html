@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cinema</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0b0b0b;
+  color: white;
+}
+
+/* NAV */
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  padding: 15px;
+  background: black;
+  position: sticky;
+  top: 0;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+nav a:hover {
+  color: red;
+}
+
+/* SECTIONS */
+section {
+  display: none;
+  padding: 30px;
+}
+
+section.active {
+  display: block;
+}
+
+/* TITLE */
+h1 {
+  text-align: center;
+  color: red;
+}
+
+/* HERO */
+.hero {
+  height: 70vh;
+  background:
+    linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+    url("https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=1600&q=80");
+
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 4rem;
+  margin: 0;
+  animation: floatTitle 3s ease-in-out infinite;
+  text-shadow: 0 0 15px red;
+}
+
+@keyframes floatTitle {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+  100% { transform: translateY(0); }
+}
+
+.hero p {
+  font-size: 1.3rem;
+  color: #ccc;
+}
+
+/* GRID */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: #1c1c1c;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.card-content {
+  padding: 10px;
+}
+
+.rating {
+  color: gold;
+  font-weight: bold;
+}
+
+/* LIGHTBOX */
+.lightbox {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.9);
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.lightbox img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 10px;
+  box-shadow: 0 0 20px black;
+  cursor: pointer;
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .hero h1 { font-size: 2.5rem; }
+  .grid { grid-template-columns: 1fr; }
+  nav { flex-direction: column; gap: 10px; }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <a onclick="show('home')">Home</a>
+  <a onclick="show('movies')">Top Movies</a>
+  <a onclick="show('reviews')">Reviews</a>
+  <a onclick="show('contact')">Contact</a>
+</nav>
+
+<!-- HOME -->
+<section id="home" class="active">
+  <div class="hero">
+    <h1>Cinema</h1>
+    <p>My Movie Universe</p>
+  </div>
+</section>
+
+<!-- MOVIES -->
+<section id="movies">
+  <h1>Top Movies</h1>
+
+  <div class="grid">
+
+    <div class="card">
+      <img src="./pirates.jpg" onclick="openLightbox(this.src)">
+      <div class="card-content">Pirates of the Caribbean</div>
+    </div>
+
+    <div class="card">
+      <img src="./lotr.jpg" onclick="openLightbox(this.src)">
+      <div class="card-content">Lord of the Rings</div>
+    </div>
+
+    <div class="card">
+      <img src="./star.jpg" onclick="openLightbox(this.src)">
+      <div class="card-content">Star Wars</div>
+    </div>
+
+    <div class="card">
+      <img src="./dark.jpg" onclick="openLightbox(this.src)">
+      <div class="card-content">The Dark Knight</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews">
+  <h1>Reviews</h1>
+
+  <div class="card"><div class="card-content">Pirates — <span class="rating">10/10</span></div></div>
+  <div class="card"><div class="card-content">Lord of the Rings — <span class="rating">9.9/10</span></div></div>
+  <div class="card"><div class="card-content">Star Wars — <span class="rating">9.8/10</span></div></div>
+  <div class="card"><div class="card-content">The Dark Knight — <span class="rating">9.5/10</span></div></div>
+
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <h1>Contact</h1>
+
+  <div style="max-width: 500px; margin: auto; text-align: center;">
+    <p>Have feedback or suggestions?</p>
+    <p><strong>Email:</strong> cinema@example.com</p>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <img id="lightbox-img">
+</div>
+
+<script>
+function show(page) {
+  document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+  document.getElementById(page).classList.add('active');
+}
+
+function openLightbox(src) {
+  document.getElementById("lightbox-img").src = src;
+  document.getElementById("lightbox").style.display = "flex";
+}
+
+function closeLightbox() {
+  document.getElementById("lightbox").style.display = "none";
+}
+</script>
+
+</body>
+</html>
